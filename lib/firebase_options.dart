@@ -41,54 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDIoElmKf4J5Uorp5sUCQ5d2rSt100p2l8',
-    appId: '1:179684636288:web:cdc481a360a9b3a47dd865',
-    messagingSenderId: '179684636288',
-    projectId: 'flutterhomework-8dc5f',
-    authDomain: 'flutterhomework-8dc5f.firebaseapp.com',
-    databaseURL: 'https://flutterhomework-8dc5f-default-rtdb.firebaseio.com',
-    storageBucket: 'flutterhomework-8dc5f.firebasestorage.app',
-    measurementId: 'G-PNPLML7WSY',
+    apiKey: 'AIzaSyBuR0CFpkojHVWKQ1at1bCPhQDhV75ZkSk',
+    appId: '1:878763209324:web:376308c229cfef7b0dde49',
+    messagingSenderId: '878763209324',
+    projectId: 'lunarcinema-1f70e',
+    authDomain: 'lunarcinema-1f70e.firebaseapp.com',
+    storageBucket: 'lunarcinema-1f70e.firebasestorage.app',
+    measurementId: 'G-47TW7EK6L4',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAZgwW6gEZnMV5re4gK3oNEfKTz7UqIMqc',
-    appId: '1:179684636288:android:6e655594db8da8f87dd865',
-    messagingSenderId: '179684636288',
-    projectId: 'flutterhomework-8dc5f',
-    databaseURL: 'https://flutterhomework-8dc5f-default-rtdb.firebaseio.com',
-    storageBucket: 'flutterhomework-8dc5f.firebasestorage.app',
+    apiKey: 'AIzaSyBPaJVar64-l1bBPWn5do3hIXcvd0BAs04',
+    appId: '1:878763209324:android:8623f95270d8e2490dde49',
+    messagingSenderId: '878763209324',
+    projectId: 'lunarcinema-1f70e',
+    storageBucket: 'lunarcinema-1f70e.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA5f1jx99lnQisy93rNJBf9EvxxkFr5wYs',
-    appId: '1:179684636288:ios:61442e15c6cd2c157dd865',
-    messagingSenderId: '179684636288',
-    projectId: 'flutterhomework-8dc5f',
-    databaseURL: 'https://flutterhomework-8dc5f-default-rtdb.firebaseio.com',
-    storageBucket: 'flutterhomework-8dc5f.firebasestorage.app',
-    iosBundleId: 'com.example.homework',
+    apiKey: 'AIzaSyCpMozWxujWdxinSkRYR5c2I-w1V7mEO8A',
+    appId: '1:878763209324:ios:07c87568a03b89570dde49',
+    messagingSenderId: '878763209324',
+    projectId: 'lunarcinema-1f70e',
+    storageBucket: 'lunarcinema-1f70e.firebasestorage.app',
+    iosBundleId: 'com.example.lunarCinema',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyA5f1jx99lnQisy93rNJBf9EvxxkFr5wYs',
-    appId: '1:179684636288:ios:61442e15c6cd2c157dd865',
-    messagingSenderId: '179684636288',
-    projectId: 'flutterhomework-8dc5f',
-    databaseURL: 'https://flutterhomework-8dc5f-default-rtdb.firebaseio.com',
-    storageBucket: 'flutterhomework-8dc5f.firebasestorage.app',
-    iosBundleId: 'com.example.homework',
+    apiKey: 'AIzaSyCpMozWxujWdxinSkRYR5c2I-w1V7mEO8A',
+    appId: '1:878763209324:ios:07c87568a03b89570dde49',
+    messagingSenderId: '878763209324',
+    projectId: 'lunarcinema-1f70e',
+    storageBucket: 'lunarcinema-1f70e.firebasestorage.app',
+    iosBundleId: 'com.example.lunarCinema',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDIoElmKf4J5Uorp5sUCQ5d2rSt100p2l8',
-    appId: '1:179684636288:web:0b73d4e3555c9f9e7dd865',
-    messagingSenderId: '179684636288',
-    projectId: 'flutterhomework-8dc5f',
-    authDomain: 'flutterhomework-8dc5f.firebaseapp.com',
-    databaseURL: 'https://flutterhomework-8dc5f-default-rtdb.firebaseio.com',
-    storageBucket: 'flutterhomework-8dc5f.firebasestorage.app',
-    measurementId: 'G-PH4LL6F0BV',
+    apiKey: 'AIzaSyBuR0CFpkojHVWKQ1at1bCPhQDhV75ZkSk',
+    appId: '1:878763209324:web:d3282bb584a923490dde49',
+    messagingSenderId: '878763209324',
+    projectId: 'lunarcinema-1f70e',
+    authDomain: 'lunarcinema-1f70e.firebaseapp.com',
+    storageBucket: 'lunarcinema-1f70e.firebasestorage.app',
+    measurementId: 'G-VQTP8F17VC',
   );
 
 }

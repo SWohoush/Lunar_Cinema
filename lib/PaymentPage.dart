@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:lunar_cinema/main.dart';
 
 class PaymentPage extends StatefulWidget {
   final String movieTitle;
@@ -15,14 +14,13 @@ class PaymentPage extends StatefulWidget {
     required this.selectedTime,
   }) : super(key: key);
 
-
   @override
   State<PaymentPage> createState() => _PaymentPageState();
 }
 
 class _PaymentPageState extends State<PaymentPage> {
   final Color mainColor = Color(0xFF200914);
-  final Color accentColor =Color(0xFFFFB2BD);
+  final Color accentColor = Color(0xFFFFB2BD);
 
   String name = '';
   String email = '';
@@ -37,7 +35,16 @@ class _PaymentPageState extends State<PaymentPage> {
     if (user != null) {
       setState(() {
         email = user.email ?? '';
-        name = user.displayName ?? 'User';
+      });
+
+      FirebaseFirestore.instance.collection('users').doc(user.uid).get().then((
+        doc,
+      ) {
+        if (doc.exists) {
+          setState(() {
+            name = doc['username'] ?? 'User';
+          });
+        }
       });
     }
   }
@@ -45,27 +52,32 @@ class _PaymentPageState extends State<PaymentPage> {
   bool isCardValid(String cardNumber) {
     final visaRegex = RegExp(r'^(?:4[0-9]{12}(?:[0-9]{3})?)$');
     final masterCardRegex = RegExp(r'^(?:5[1-5][0-9]{14})$');
-    return visaRegex.hasMatch(cardNumber) || masterCardRegex.hasMatch(cardNumber);
+    return visaRegex.hasMatch(cardNumber) ||
+        masterCardRegex.hasMatch(cardNumber);
   }
 
   void confirmBooking() async {
     if (paymentMethod == 'Card' && !isCardValid(cardNumberController.text)) {
       showDialog(
         context: context,
-        builder: (_) => AlertDialog(
-          backgroundColor: mainColor,
-          title: Text("Invalid Card", style: TextStyle(color: Colors.white)),
-          content: Text(
-            "Please enter a valid Visa or MasterCard number.",
-            style: TextStyle(color: Colors.white),
-          ),
-          actions: [
-            TextButton(
-              child: Text("OK", style: TextStyle(color: accentColor)),
-              onPressed: () => Navigator.pop(context),
+        builder:
+            (_) => AlertDialog(
+              backgroundColor: mainColor,
+              title: Text(
+                "Invalid Card",
+                style: TextStyle(color: Colors.white),
+              ),
+              content: Text(
+                "Please enter a valid Visa or MasterCard number.",
+                style: TextStyle(color: Colors.white),
+              ),
+              actions: [
+                TextButton(
+                  child: Text("OK", style: TextStyle(color: accentColor)),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
             ),
-          ],
-        ),
       );
       return;
     }
@@ -80,45 +92,58 @@ class _PaymentPageState extends State<PaymentPage> {
         'time': widget.selectedTime.toString(),
         'timestamp': FieldValue.serverTimestamp(),
       });
-      print('Booking data being added to Firestore');
+
       showDialog(
         context: context,
-        builder: (_) => AlertDialog(
-          backgroundColor: mainColor,
-          title: Text("Booking Confirmed", style: TextStyle(color: Colors.white)),
-          content: Text(
-            "Movie: ${widget.movieTitle}\nDate: ${widget.selectedDate}\nTime: ${widget.selectedTime}\nPayment: $paymentMethod",
-            style: TextStyle(color: Colors.white),
-          ),
-          actions: [
-            TextButton(
-              child: Text("Go To Home Page", style: TextStyle(color: accentColor)),
-              onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-              },
+        builder:
+            (_) => AlertDialog(
+              backgroundColor: mainColor,
+              title: Text(
+                "Booking Confirmed",
+                style: TextStyle(color: Colors.white),
+              ),
+              content: Text(
+                "Movie: ${widget.movieTitle}\nDate: ${widget.selectedDate}\nTime: ${widget.selectedTime}\nPayment: $paymentMethod",
+                style: TextStyle(color: Colors.white),
+              ),
+              actions: [
+                TextButton(
+                  child: Text(
+                    "Go To Home Page",
+                    style: TextStyle(color: accentColor),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      '/home',
+                      (route) => false,
+                    );
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
       );
-
     } catch (e) {
       showDialog(
         context: context,
-        builder: (_) => AlertDialog(
-          backgroundColor: Colors.black,
-          title: Text("Error", style: TextStyle(color: Colors.white)),
-          content: Text("Failed to book: $e", style: TextStyle(color: Colors.white)),
-          actions: [
-            TextButton(
-              child: Text("OK", style: TextStyle(color: accentColor)),
-              onPressed: () => Navigator.pop(context),
+        builder:
+            (_) => AlertDialog(
+              backgroundColor: Colors.black,
+              title: Text("Error", style: TextStyle(color: Colors.white)),
+              content: Text(
+                "Failed to book: $e",
+                style: TextStyle(color: Colors.white),
+              ),
+              actions: [
+                TextButton(
+                  child: Text("OK", style: TextStyle(color: accentColor)),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
             ),
-          ],
-        ),
       );
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -135,14 +160,17 @@ class _PaymentPageState extends State<PaymentPage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(40, 30, 70,0),
+        padding: const EdgeInsets.fromLTRB(40, 30, 70, 0),
 
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Payment", style: TextStyle(color: Color(0xFFC9BABA),fontSize: 30)),
-            SizedBox(height: 40,),
+            Text(
+              "Payment",
+              style: TextStyle(color: Color(0xFFC9BABA), fontSize: 30),
+            ),
+            SizedBox(height: 40),
             Text("Name", style: TextStyle(color: Color(0xFFC9BABA))),
             SizedBox(height: 4),
             TextField(
@@ -215,7 +243,7 @@ class _PaymentPageState extends State<PaymentPage> {
             TextField(
               controller: cvvController,
               enabled: paymentMethod == 'Card',
-              style: TextStyle(color:mainColor),
+              style: TextStyle(color: mainColor),
               decoration: InputDecoration(
                 filled: true,
                 fillColor: paymentMethod == 'Card' ? accentColor : Colors.grey,
@@ -233,17 +261,28 @@ class _PaymentPageState extends State<PaymentPage> {
                     borderRadius: BorderRadius.circular(3),
                   ),
                   backgroundColor: accentColor,
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 20,
+                  ),
                 ),
-                child: Text("Confirm Payment", style: TextStyle(color: mainColor,fontWeight: FontWeight.w500,fontSize: 17)),
+                child: Text(
+                  "Confirm Payment",
+                  style: TextStyle(
+                    color: mainColor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 17,
+                  ),
+                ),
               ),
             ),
           ],
-         ),
+        ),
       ),
     );
   }
 }
+
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;

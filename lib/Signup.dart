@@ -22,7 +22,7 @@ class _SignupState extends State<Signup> {
   Widget printErrorMessage() {
     return Text(
       errorMessage == '' ? '' : '$errorMessage',
-      style: TextStyle(color: Colors.red),
+      style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
     );
   }
 
@@ -31,7 +31,7 @@ class _SignupState extends State<Signup> {
     auth = Provider.of<Authentication>(context);
     return Scaffold(
       backgroundColor: Color(0xFF520C2E),
-      body: SizedBox.expand(
+      body: SingleChildScrollView(
         child: Center(
           child: Container(
             width: 300,
@@ -40,6 +40,7 @@ class _SignupState extends State<Signup> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  SizedBox(height: 27),
                   Container(
                     width: 200,
                     child: Image(
@@ -48,11 +49,12 @@ class _SignupState extends State<Signup> {
                       fit: BoxFit.contain,
                     ),
                   ),
-                  SizedBox(height: 18),
                   TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your Username';
+                      } else if (value.length < 3) {
+                        return 'Username is too short';
                       }
                       return null;
                     },
@@ -122,6 +124,8 @@ class _SignupState extends State<Signup> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a Password';
+                      } else if (value.length < 6) {
+                        return 'The password should be at least 6 characters';
                       }
                       return null;
                     },
@@ -152,42 +156,6 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                   SizedBox(height: 27),
-                  TextFormField(
-                    validator: (value) {
-                      if (value == null ||
-                          value.isEmpty ||
-                          passwordController.text.trim() != value) {
-                        return 'Please re-enter your Password';
-                      }
-                      return null;
-                    },
-                    style: TextStyle(color: Colors.white),
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Color(0xFF520C2E),
-                      icon: Icon(Icons.password, color: Colors.white),
-                      hintText: "Re-Enter Password",
-                      label: Text(
-                        "Confirm Password",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      hintStyle: TextStyle(
-                        color: Colors.white, // Change hint text color here
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(9)),
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(9)),
-                        borderSide: BorderSide(
-                          color: Colors.pinkAccent, // Borde
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 50),
                   Container(
                     height: 50,
                     width: 120,
@@ -229,7 +197,7 @@ class _SignupState extends State<Signup> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 25),
                   printErrorMessage(),
                 ],
               ),
@@ -249,7 +217,6 @@ class _SignupState extends State<Signup> {
       try {
         await auth.signUp(email: email, password: password, username: username);
 
-        // Navigate to home page on successful signup
         Navigator.pushNamed(context, '/home');
       } catch (error) {
         setState(() {

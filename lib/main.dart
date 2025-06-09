@@ -1,9 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:lunar_cinema/BookingPage.dart';
 import 'package:lunar_cinema/MoviesPage.dart';
-import 'package:lunar_cinema/PaymentPage.dart';
 import 'package:provider/provider.dart';
 
 import 'Login.dart';
@@ -35,7 +32,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => Login(),
         '/signup': (context) => Signup(),
-        '/home':(context)=>MoviesPage(),
+        '/home': (context) => MoviesPage(),
       },
     );
   }

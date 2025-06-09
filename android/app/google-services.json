@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "878763209324",
+    "project_id": "lunarcinema-1f70e",
+    "storage_bucket": "lunarcinema-1f70e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878763209324:android:8623f95270d8e2490dde49",
+        "android_client_info": {
+          "package_name": "com.example.lunar_cinema"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPaJVar64-l1bBPWn5do3hIXcvd0BAs04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878763209324:android:c6b2a9659e60d2a00dde49",
+        "android_client_info": {
+          "package_name": "com.lunar.cinema"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPaJVar64-l1bBPWn5do3hIXcvd0BAs04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

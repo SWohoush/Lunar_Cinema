@@ -75,99 +75,107 @@ class MoviesPage extends StatelessWidget {
 
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(30),
-          child:Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-          Text("Available Movies",style: TextStyle(fontSize: 30,
-            color: Color(0xFFC9BABA),
-            fontWeight: FontWeight.w100,),),
-          SizedBox(height: 20,),
-          Wrap(
-            spacing: 15,
-            runSpacing: 15,
-            children:
-                movies.map((movie) {
-                  return Container(
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF520C2E),
-                      borderRadius: BorderRadius.circular(5),
-                      boxShadow: [
-                        BoxShadow(color: Colors.black26, blurRadius: 4),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(5),
-                          ),
-                          child: Image.network(
-                            movie['image']!,
-                            height: 300,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
+              Text(
+                "Available Movies",
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Color(0xFFC9BABA),
+                  fontWeight: FontWeight.w100,
+                ),
+              ),
+              SizedBox(height: 20),
+              Wrap(
+                spacing: 15,
+                runSpacing: 15,
+                children:
+                    movies.map((movie) {
+                      return Container(
+                        width: 200,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF520C2E),
+                          borderRadius: BorderRadius.circular(5),
+                          boxShadow: [
+                            BoxShadow(color: Colors.black26, blurRadius: 4),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(5, 8, 5, 12),
-                          child: InkWell(
-                            onTap: () => launchUrl(Uri.parse(movie['imdb']!)),
-                            child: Text(
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              movie['title']!,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 14,
-                                decoration: TextDecoration.underline,
-                                decorationColor: Colors.white,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(5),
                               ),
-                              textAlign: TextAlign.center,
+                              child: Image.network(
+                                movie['image']!,
+                                height: 300,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder:
-                                      (_) => BookingPage(
-                                        title: movie['title']!,
-                                        imageUrl: movie['image']!,
-                                      ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(5, 8, 5, 12),
+                              child: InkWell(
+                                onTap:
+                                    () => launchUrl(Uri.parse(movie['imdb']!)),
+                                child: Text(
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  movie['title']!,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 14,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFFC9BABA),
-                              minimumSize: Size(double.infinity, 36),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(3),
                               ),
                             ),
-                            child: const Text(
-                              'BOOK NOW',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Color(0xFF520C2E),
-                                fontWeight: FontWeight.w700,
+                            Container(
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
+
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (_) => BookingPage(
+                                            title: movie['title']!,
+                                            imageUrl: movie['image']!,
+                                          ),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(0xFFC9BABA),
+                                  minimumSize: Size(double.infinity, 36),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(3),
+                                  ),
+                                ),
+                                child: const Text(
+                                  'BOOK NOW',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Color(0xFF520C2E),
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                }).toList(),
+                      );
+                    }).toList(),
+              ),
+            ],
           ),
-            ], ),),
+        ),
       ),
     );
   }
